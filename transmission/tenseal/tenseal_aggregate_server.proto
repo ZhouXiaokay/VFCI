@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+
+// client send it to aggregate server
+message bottom_output{
+    int32 client_rank = 1;
+    int32 round = 2;
+    bytes params_msg = 3;
+}
+
+message bottom_grad{
+    int32 client_rank = 1;
+    bytes grad_msg = 2;
+}
+
+
+service AggregateServerService {
+  //  AggregateServer provides the interface, client remotes the call
+  rpc middle_forward(bottom_output) returns (bottom_grad);
+
+}

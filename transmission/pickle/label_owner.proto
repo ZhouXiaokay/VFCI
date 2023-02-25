@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+
+// client send it to aggregate server
+message middle_output{
+    int32 round = 1;
+    int32 epoch = 2;
+    bytes params_msg = 3;
+}
+
+message middle_grad{
+    int32 round = 1;
+    bytes grad_msg = 2;
+}
+
+
+service LabelOwnerService {
+  //  AggregateServer provides the interface, client remotes the call
+  rpc top_fp_bp(middle_output) returns (middle_grad);
+
+}
